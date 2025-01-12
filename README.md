@@ -1,4 +1,16 @@
-# Tailwind 
+# How to run
+
+Start server: 
+```
+npm run start:server
+```
+
+Start app in separate window:
+```
+npm start
+```
+
+## Tailwind 
 Following the setup instructions: https://tailwindcss.com/docs/guides/create-react-app 
 
 That migh change over the time, but current setup looks like here:
@@ -35,7 +47,7 @@ function App() {
 export default App;
 ```
 
-# API Server Setup
+## API Server Setup
 Required changes for API server setup:
 db.json
 ```json
@@ -63,9 +75,9 @@ http://localhost:3005/albums
 http://localhost:3005/photos
 ```
 
-# Data structure
+## Data structure
 
-## Denormalized form
+### Denormalized form
 
 ```js
 [
@@ -93,7 +105,12 @@ Embedding of records inside of another:
 - the top level one represents a user (with id, name and albums properties),  
 - album is an array of objects again (with id and name properties)
 
-## Normalized form
++ easier to use if data is already structured
++ good if project has rock-solid requirements that won't change
+
+Listing users seems to be easy, but listing albums not really
+
+### Normalized form
 
 ```js
 albums = [
@@ -108,3 +125,15 @@ users = [
 ]
 ```
 
++ more flexible 
++ more code to write
+
+Listing albums assigned to the user:
+```
+const getAlbumsOfUser(albums, user) {
+  return albums.filter(album => album.userId === uses.id)
+}
+```
+### In this application
+
+Both JSON server and app will use `Normalized Format` 
